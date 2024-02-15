@@ -1,5 +1,5 @@
 from lib.database_connection import DatabaseConnection
-from lib.artist_repository import ArtistRepository
+from lib.recipe_repository import RecipeRepository
 
 
 # Connect to the database
@@ -10,7 +10,10 @@ connection.connect()
 # connection.seed("seeds/music_library.sql")
 
 # Retrieve all recipes
-
+all_recipes = RecipeRepository(connection)
+list_of_all_recipes = all_recipes.all()
 
 # List them out
+for recipe in list_of_all_recipes:
+    print (recipe)
 

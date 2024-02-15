@@ -1,27 +1,22 @@
 from lib.recipe import Recipe
 
 class RecipeRepository:
-    pass
+    def __init__(self, connection):
+        self._connection = connection
 
-#     # We initialise with a database connection
-#     def __init__(self, connection):
-#         self._connection = connection
+    def all(self):
+        rows = self._connection.execute('SELECT * from recipes')
+        recipes = []
+        for row in rows:
+            item = Recipe(row["id"], row["recipe_name"], row["cooking_time"], row["rating"])
+            recipes.append(item)
+        return recipes
 
-#     # Retrieve all artists
-#     def all(self):
-#         rows = self._connection.execute('SELECT * from artists')
-#         artists = []
-#         for row in rows:
-#             item = Artist(row["id"], row["name"], row["genre"])
-#             artists.append(item)
-#         return artists
-
-#     # Find a single artist by their id
-#     def find(self, artist_id):
-#         rows = self._connection.execute(
-#             'SELECT * from artists WHERE id = %s', [artist_id])
-#         row = rows[0]
-#         return Artist(row["id"], row["name"], row["genre"])
+    def find(self, recipe_id):
+        rows = self._connection.execute(
+            'SELECT * from recipes WHERE id = %s', [recipe_id])
+        row = rows[0]
+        return Recipe(row["id"], row["recipe_name"], row["cooking_time"], row["rating"])
 
 #     # Create a new artist
 #     # Do you want to get its id back? Look into RETURNING id;

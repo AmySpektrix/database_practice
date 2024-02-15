@@ -1,34 +1,34 @@
 from lib.recipe_repository import RecipeRepository
 from lib.recipe import Recipe
 
-# """
-# When we call ArtistRepository#all
-# We get a list of Artist objects reflecting the seed data.
-# """
-# def test_get_all_records(db_connection): # See conftest.py to learn what `db_connection` is.
-#     db_connection.seed("seeds/music_library.sql") # Seed our database with some test data
-#     repository = ArtistRepository(db_connection) # Create a new ArtistRepository
+"""
+When we call RecipeRepository#all
+We get a list of Recipe objects reflecting the seed data.
+"""
+def test_get_all_records(db_connection): 
+    db_connection.seed("seeds/recipe_directory.sql") 
+    repository = RecipeRepository(db_connection) 
 
-#     artists = repository.all() # Get all artists
+    recipes = repository.all()
 
-#     # Assert on the results
-#     assert artists == [
-#         Artist(1, "Pixies", "Rock"),
-#         Artist(2, "ABBA", "Pop"),
-#         Artist(3, "Taylor Swift", "Pop"),
-#         Artist(4, "Nina Simone", "Jazz"),
-#     ]
+    assert recipes == [
+        Recipe(1, 'Puttanesca Pasta Sauce', 25, 4),
+        Recipe(2, 'Lentil Lasagna', 60, 4),
+        Recipe(3, 'Leek and Potato Soup', 20, 3),
+        Recipe(4, 'Aubergine Parmagiana', 90, 5),
+        Recipe(5, 'Spinach and Sweet Potato Enchilada Bake', 60, 2)
+    ]
 
-# """
-# When we call ArtistRepository#find
-# We get a single Artist object reflecting the seed data.
-# """
-# def test_get_single_record(db_connection):
-#     db_connection.seed("seeds/music_library.sql")
-#     repository = ArtistRepository(db_connection)
+"""
+When we call RecipeRepository#find
+We get a single Recipe object reflecting the seed data.
+"""
+def test_get_single_record(db_connection):
+    db_connection.seed("seeds/recipe_directory.sql") 
+    repository = RecipeRepository(db_connection) 
 
-#     artist = repository.find(3)
-#     assert artist == Artist(3, "Taylor Swift", "Pop")
+    recipe = repository.find(3)
+    assert recipe == Recipe(3, 'Leek and Potato Soup', 20, 3)
 
 # """
 # When we call ArtistRepository#create
