@@ -58,5 +58,5 @@ CREATE TABLE students (
 ## 5. Create the table
 
 ```bash
-psql -h 127.0.0.1 database_name < albums_table.sql
+psql -h 127.0.0.1 student_directory_1 < /Users/amybrown/Documents/Modern_Software_Engineering_Foundations-Learning/databases/database_practice/designing_a_schema/students_table.sql
 ```

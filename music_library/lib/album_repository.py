@@ -13,4 +13,7 @@ class AlbumRepository:
             albums.append(album)
         return albums
     
-    
+    def find(self, album_id):
+        single_album = self.connection.execute('SELECT * FROM albums WHERE id = %s',[album_id])
+        row = single_album[0]
+        return  Album(row["id"], row["title"], row["release_year"], row["artist_id"])

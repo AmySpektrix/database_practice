@@ -23,3 +23,6 @@ albums = album_repository.all()
 
 for album in albums:
     print(album)
+
+first_album = album_repository.find(1)
+print (first_album)
