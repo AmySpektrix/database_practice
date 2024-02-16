@@ -1,5 +1,6 @@
 from lib.users_repository import UsersRepository
 from lib.users import User
+from lib.posts import Post
 
 """
 When we call UsersRepository#all
@@ -56,3 +57,19 @@ def test_delete_record(db_connection):
                 User(1,'amy_brown', 'amys-fake-email@hotmail.com'),
                 User(2, 'best_username_ever', 'what-a-great-email@email.com')
         ]
+    
+"""
+We can find a users posts by calling Users# find_posts_by_username
+"""
+
+def test_find_posts_by_username(db_connection):
+    db_connection.seed("seeds/social_network.sql")
+    repository = UsersRepository(db_connection)
+    users_posts = repository.find_posts_by_username("amy_brown")
+    assert users_posts == [Post(1, 1, 'What I did on my Holidays', 'It was great, I went to the beach', 10), Post(3, 1, 'What I did when I got back from my Holidays', 'actually not a lot really, just went to the shops because we were out of milk :(', 300)]   
+
+def test_find_userid_by_username(db_connection):
+    db_connection.seed("seeds/social_network.sql")
+    repository = UsersRepository(db_connection)
+    user_id = repository.find_user_id("amy_brown")
+    assert user_id == 1
