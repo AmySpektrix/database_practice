@@ -7,6 +7,7 @@ class Application():
     def __init__(self):
         self._connection = DatabaseConnection()
         self._connection.connect()
+        self._connection.seed("seeds/social_network.sql")
 
     def run(self):
         print("Welcome to the basic social network!")
@@ -17,8 +18,6 @@ class Application():
     1 - See all posts by a user by their username
     2 - Add a new post
     3 - Delete a post
-    4 - Reseed database
-    5 - Exit application
             """)
             choice = input("Enter your choice:")
             print("")
@@ -52,14 +51,8 @@ class Application():
                 choice = input("Which post do you want to delete?")
                 repository_post.delete(choice)
                 print(f"You have deleted post with the id {choice}")
-
-            elif choice == "4":
-                self._connection.seed("seeds/social_network.sql")
-            elif choice == "5":
-                program_continue = "N"            
             else:
                 print ("that is not a valid choice please re-run the app to start again")
-            
             
             print("")
             program_continue = input("Type 'Y' to continue with the program or any other character to exit the program")
